@@ -1,9 +1,8 @@
 {
-  "name": "spdx",
+  "name": "spdx-expression-parse",
   "description": "parse SPDX license expressions",
-  "version": "0.4.1",
+  "version": "0.0.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
-  "bugs": "https://github.com/kemitchell/spdx.js/issues",
   "dependencies": {
     "spdx-exceptions": "^1.0.0",
     "spdx-license-ids": "^1.0.0"
@@ -12,7 +11,6 @@
     "defence-cli": "^1.0.1",
     "jison": "^0.4.15"
   },
-  "homepage": "https://github.com/kemitchell/spdx.js",
   "keywords": [
     "SPDX",
     "law",
@@ -23,8 +21,8 @@
     "package.json",
     "standards"
   ],
-  "license": "MIT",
-  "repository": "kemitchell/spdx.js",
+  "license": "(MIT AND CC-BY-3.0)",
+  "repository": "kemitchell/spdx-expression-parse.js",
   "scripts": {
     "generate": "node generate-parser.js > parser.generated.js",
     "prepublish": "npm run generate",
