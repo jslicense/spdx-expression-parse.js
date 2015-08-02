@@ -1,5 +1,4 @@
-var parser = require('./parser.generated.js').parser;
+var parser = require('./parser.generated.js').parser
 
 module.exports = function(argument) {
-  return parser.parse(argument);
-};
+  return parser.parse(argument) }

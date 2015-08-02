@@ -3,32 +3,30 @@ var parse = require('./')
 var assert = require('assert')
 
 var firstAST = {
-  left: {license: 'LGPL-2.1'},
+  left: { license: 'LGPL-2.1' },
   conjunction: 'or',
   right: {
-    left: {license: 'BSD-3-Clause'},
+    left: { license: 'BSD-3-Clause' },
     conjunction: 'and',
-    right: {license: 'MIT'}
-  }
-};
+    right: { license: 'MIT' } } }
+
 assert.deepEqual(
   parse('(LGPL-2.1 OR BSD-3-Clause AND MIT)'),
-  firstAST
-);
+  firstAST)
 
 var secondAST = {
-  left: {license: 'MIT'},
+  left: { license: 'MIT' },
   conjunction: 'and',
   right: {
-    left: {license: 'LGPL-2.1', plus: true},
+    left: {
+	  license: 'LGPL-2.1',
+	  plus: true },
     conjunction: 'and',
-    right: {license: 'BSD-3-Clause'}
-  }
-};
+    right: { license: 'BSD-3-Clause' } } }
+
 assert.deepEqual(
   parse('(MIT AND (LGPL-2.1+ AND BSD-3-Clause))'),
-  secondAST
-);
+  secondAST)
 ```
 
 ---
