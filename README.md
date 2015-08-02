@@ -1,5 +1,5 @@
 ```javascript
-var parse = require('./')
+var parse = require('spdx-expression-parse')
 var assert = require('assert')
 
 var firstAST = {
