@@ -9,7 +9,8 @@
   },
   "devDependencies": {
     "defence-cli": "^1.0.1",
-    "jison": "^0.4.15"
+    "jison": "^0.4.15",
+    "replace-require-self": "^1.0.0"
   },
   "keywords": [
     "SPDX",
@@ -27,6 +28,6 @@
     "generate": "node generate-parser.js > parser.generated.js",
     "prepublish": "npm run generate",
     "pretest": "npm run generate",
-    "test": "defence -i javascript README.md | sed 's!spdx-expression-parse!./!' | node"
+    "test": "defence -i javascript README.md | replace-require-self | node"
   }
 }
