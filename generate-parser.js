@@ -11,24 +11,24 @@ var quote = function(argument) {
 
 var ret = function(token) {
   return function(character) {
-    return [ character, 'return ' +  quote(token) + '' ] } }
+    return [ character, 'return ' +  quote(token) ] } }
 
 var grammar = {
   lex: {
     macros: { },
     rules: [
-      [ '$', 'return ' + quote('EOS') + ';' ],
+      [ '$', 'return ' + quote('EOS') ],
       [ '\\s+', '/* skip whitespace */' ],
-      [ '\\+', 'return ' + quote('PLUS') + ';' ],
-      [ '\\(', 'return ' + quote('OPEN') + ';' ],
-      [ '\\)', 'return ' + quote('CLOSE') + ';' ],
-      [ ':', 'return ' + quote('COLON') + ';' ],
+      [ '\\+', 'return ' + quote('PLUS') ],
+      [ '\\(', 'return ' + quote('OPEN') ],
+      [ '\\)', 'return ' + quote('CLOSE') ],
+      [ ':', 'return ' + quote('COLON') ],
       [ 'DocumentRef-([0-9A-Za-z-+.]+)',
-        'return ' + quote('DOCUMENTREF') + ';' ],
+        'return ' + quote('DOCUMENTREF') ],
       [ 'LicenseRef-([0-9A-Za-z-+.]+)',
-        'return ' + quote('LICENSEREF') + ';' ] ]
+        'return ' + quote('LICENSEREF') ] ]
       .concat(words.map(function(word) {
-        return [ word, 'return ' + quote(word) + ';' ] }))
+        return [ word, 'return ' + quote(word) ] }))
       .concat(require('spdx-license-ids').map(ret('LICENSE')))
       .concat(require('spdx-exceptions').map(ret('EXCEPTION'))) },
   operators: [
@@ -48,29 +48,30 @@ var grammar = {
   start: 'start',
   bnf: {
     start: [
-      [ 'expression EOS', 'return $$ = $1;' ] ],
+      [ 'expression EOS', 'return $$ = $1' ] ],
     simpleExpression: [
       [ 'LICENSE',
-        '$$ = { license: yytext };' ],
+        '$$ = { license: yytext }' ],
       [ 'LICENSE PLUS',
-        '$$ = { license: $1, plus: true };' ],
+        '$$ = { license: $1, plus: true }' ],
       [ 'LICENSEREF',
-        '$$ = { license: yytext };' ],
+        '$$ = { license: yytext }' ],
       [ 'DOCUMENTREF COLON LICENSEREF',
-        '$$ = { license: yytext };' ] ],
+        '$$ = { license: yytext }' ] ],
     expression: [
       [ 'simpleExpression',
-        '$$ = $1;' ],
+        '$$ = $1' ],
       [ 'simpleExpression WITH EXCEPTION',
-        [ '$$ = { exception: $3 };',
-          '$$.license = $1.license;',
+        [ '$$ = { exception: $3 }',
+          '$$.license = $1.license',
           'if ($1.hasOwnProperty(\'plus\')) {',
-          '  $$.plus = $1.plus;',
-          '}' ].join('\n') ],
+          '  $$.plus = $1.plus',
+          '}' ]
+          .join('\n') ],
       [ 'expression AND expression',
-        '$$ = { conjunction: \'and\', left: $1, right: $3 };' ],
+        '$$ = { conjunction: \'and\', left: $1, right: $3 }' ],
       [ 'expression OR expression',
-        '$$ = { conjunction: \'or\', left: $1, right: $3 };' ],
+        '$$ = { conjunction: \'or\', left: $1, right: $3 }' ],
       [ 'OPEN expression CLOSE',
         '$$ = $2' ] ] } }
 
