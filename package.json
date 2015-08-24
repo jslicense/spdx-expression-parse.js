@@ -26,9 +26,8 @@
   "license": "(MIT AND CC-BY-3.0)",
   "repository": "kemitchell/spdx-expression-parse.js",
   "scripts": {
-    "generate": "node generate-parser.js | uglifyjs > parser.generated.js",
-    "prepublish": "npm run generate",
-    "pretest": "npm run generate",
+    "prepublish": "node generate-parser.js | uglifyjs > parser.generated.js",
+    "pretest": "npm run prepublish",
     "test": "defence -i javascript README.md | replace-require-self | node"
   }
 }
