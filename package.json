@@ -10,7 +10,8 @@
   "devDependencies": {
     "defence-cli": "^1.0.1",
     "jison": "^0.4.15",
-    "replace-require-self": "^1.0.0"
+    "replace-require-self": "^1.0.0",
+    "uglify-js": "^2.4.24"
   },
   "keywords": [
     "SPDX",
@@ -25,7 +26,7 @@
   "license": "(MIT AND CC-BY-3.0)",
   "repository": "kemitchell/spdx-expression-parse.js",
   "scripts": {
-    "generate": "node generate-parser.js > parser.generated.js",
+    "generate": "node generate-parser.js | uglifyjs > parser.generated.js",
     "prepublish": "npm run generate",
     "pretest": "npm run generate",
     "test": "defence -i javascript README.md | replace-require-self | node"
