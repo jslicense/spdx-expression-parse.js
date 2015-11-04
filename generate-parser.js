@@ -17,9 +17,6 @@ var handleLicensesAndExceptions = function() {
   var ids = require('spdx-license-ids');
   var exceptions = require('spdx-exceptions');
 
-  // Work around the fact that SPDX exception list has trailing whitespace.
-  exceptions = exceptions.map(function(s) { return s.trim(); });
-
   // Sort tokens longest-first (both license ids and exception strings)
   var tokens = ids.concat(exceptions);
   tokens.sort(function(a, b) { return b.length - a.length; });

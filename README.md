@@ -36,7 +36,7 @@ require('spdx-license-ids').forEach(function(id) {
   require('spdx-exceptions').forEach(function(e) {
     assert.deepEqual(
       parse(id + ' WITH ' + e),
-      { license: id, exception: e.trim() });
+      { license: id, exception: e });
   });
 });
 ```

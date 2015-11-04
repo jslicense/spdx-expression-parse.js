@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
   "dependencies": {
-    "spdx-exceptions": "^1.0.0",
+    "spdx-exceptions": "^1.0.4",
     "spdx-license-ids": "^1.0.0"
   },
   "devDependencies": {
