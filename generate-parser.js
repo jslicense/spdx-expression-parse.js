@@ -10,21 +10,18 @@ var quote = function(argument) {
   return '\'' + argument + '\'' }
 
 var regexEscape = function(s) {
-  return s.replace(/[\^\\$*+?.()|{}\[\]\/]/g, '\\$&');
-};
+  return s.replace(/[\^\\$*+?.()|{}\[\]\/]/g, '\\$&') }
 
 var handleLicensesAndExceptions = function() {
-  var ids = require('spdx-license-ids');
-  var exceptions = require('spdx-exceptions');
+  var ids = require('spdx-license-ids')
+  var exceptions = require('spdx-exceptions')
 
   // Sort tokens longest-first (both license ids and exception strings)
-  var tokens = ids.concat(exceptions);
-  tokens.sort(function(a, b) { return b.length - a.length; });
+  var tokens = ids.concat(exceptions)
+  tokens.sort(function(a, b) { return ( b.length - a.length ) })
   return tokens.map(function(t) {
-    var type = (ids.indexOf(t) >= 0) ? 'LICENSE' : 'EXCEPTION';
-    return [ regexEscape(t), 'return ' + quote(type) ];
-  });
-}
+    var type = ( (ids.indexOf(t) >= 0) ? 'LICENSE' : 'EXCEPTION' )
+    return [ regexEscape(t), ( 'return ' + quote(type) ) ] }) }
 
 var grammar = {
   lex: {
