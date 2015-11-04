@@ -32,13 +32,11 @@ assert.deepEqual(
 require('spdx-license-ids').forEach(function(id) {
   assert.deepEqual(
     parse(id),
-    { license: id });
+    { license: id })
   require('spdx-exceptions').forEach(function(e) {
     assert.deepEqual(
       parse(id + ' WITH ' + e),
-      { license: id, exception: e });
-  });
-});
+      { license: id, exception: e }) }) })
 ```
 
 ---
