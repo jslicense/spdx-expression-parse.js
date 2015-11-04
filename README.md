@@ -27,6 +27,18 @@ var secondAST = {
 assert.deepEqual(
   parse('(MIT AND (LGPL-2.1+ AND BSD-3-Clause))'),
   secondAST)
+
+// We handle all the bare SPDX license and exception ids as well.
+require('spdx-license-ids').forEach(function(id) {
+  assert.deepEqual(
+    parse(id),
+    { license: id });
+  require('spdx-exceptions').forEach(function(e) {
+    assert.deepEqual(
+      parse(id + ' WITH ' + e),
+      { license: id, exception: e });
+  });
+});
 ```
 
 ---
