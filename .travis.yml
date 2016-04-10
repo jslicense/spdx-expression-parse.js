@@ -6,4 +6,10 @@ node_js:
   - "0.12"
   - "4.2"
   - "node"
+# Each of these env lines has to have multiple assignments to trigger a
+# different build for each NODE_FLAGS value.
+env:
+  - NODE_FLAGS=""             SECOND=""
+  - NODE_FLAGS="--use_strict" SECOND=""
+script: "npm run test -- $NODE_FLAGS"
 sudo: false
