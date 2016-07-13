@@ -11,6 +11,7 @@
     "defence-cli": "^1.0.1",
     "jison": "^0.4.15",
     "replace-require-self": "^1.0.0",
+    "standard": "^7.1.2",
     "uglify-js": "^2.4.24"
   },
   "keywords": [
@@ -26,7 +27,8 @@
   "license": "(MIT AND CC-BY-3.0)",
   "repository": "kemitchell/spdx-expression-parse.js",
   "scripts": {
-    "prepublish": "node generate-parser.js | uglifyjs > parser.generated.js",
+    "lint": "standard",
+    "prepublish": "node generate-parser.js | uglifyjs > parser.min.js",
     "pretest": "npm run prepublish",
     "test": "defence -i javascript README.md | replace-require-self | node"
   }

@@ -7,3 +7,4 @@ node_js:
   - "4.2"
   - "node"
 sudo: false
+script: [ "npm test", "npm run lint" ]
