@@ -7,6 +7,11 @@
     "spdx-exceptions": "^1.0.4",
     "spdx-license-ids": "^1.0.0"
   },
+  "files": [
+    "AUTHORS",
+    "index.js",
+    "parser.min.js"
+  ],
   "devDependencies": {
     "defence-cli": "^1.0.1",
     "jison": "^0.4.15",
