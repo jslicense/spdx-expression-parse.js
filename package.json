@@ -3,10 +3,6 @@
   "description": "parse SPDX license expressions",
   "version": "1.0.2",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
-  "dependencies": {
-    "spdx-exceptions": "^1.0.4",
-    "spdx-license-ids": "^1.0.0"
-  },
   "files": [
     "AUTHORS",
     "index.js",
@@ -16,6 +12,8 @@
     "defence-cli": "^1.0.1",
     "jison": "^0.4.15",
     "replace-require-self": "^1.0.0",
+    "spdx-exceptions": "^1.0.4",
+    "spdx-license-ids": "^1.0.0",
     "standard": "^7.1.2",
     "uglify-js": "^2.4.24"
   },
