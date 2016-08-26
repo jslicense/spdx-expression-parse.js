@@ -1,4 +1,4 @@
-var parser = require('./parser.min.js').parser
+var parser = require('./parser').parser
 
 module.exports = function (argument) {
   return parser.parse(argument)
