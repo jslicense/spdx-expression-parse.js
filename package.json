@@ -14,7 +14,7 @@
     "replace-require-self": "^1.0.0",
     "spdx-exceptions": "^1.0.4",
     "spdx-license-ids": "^1.0.0",
-    "standard": "^7.1.2"
+    "standard": "^8.0.0"
   },
   "keywords": [
     "SPDX",
