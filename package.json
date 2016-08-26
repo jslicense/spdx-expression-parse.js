@@ -1,7 +1,7 @@
 {
   "name": "spdx-expression-parse",
   "description": "parse SPDX license expressions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
   "files": [
     "AUTHORS",
