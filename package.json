@@ -9,7 +9,7 @@
     "parser.js"
   ],
   "devDependencies": {
-    "defence-cli": "^1.0.1",
+    "defence-cli": "^2.0.1",
     "jison": "^0.4.15",
     "replace-require-self": "^1.0.0",
     "spdx-exceptions": "^1.0.4",
