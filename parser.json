@@ -34,7 +34,7 @@
         "return $$ = $1"
       ]
     ],
-    "simpleExpression": [
+    "license": [
       [
         "LICENSE",
         "$$ = {license: yytext}"
@@ -54,11 +54,11 @@
     ],
     "expression": [
       [
-        "simpleExpression",
+        "license",
         "$$ = $1"
       ],
       [
-        "simpleExpression WITH EXCEPTION",
+        "license WITH EXCEPTION",
         "$$ = {exception: $3}; $$.license = $1.license; if ($1.hasOwnProperty('plus')) { $$.plus = $1.plus }"
       ],
       [
