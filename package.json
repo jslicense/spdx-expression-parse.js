@@ -6,7 +6,8 @@
   "files": [
     "AUTHORS",
     "index.js",
-    "parser.js"
+    "parser.js",
+    "scanner.js"
   ],
   "devDependencies": {
     "defence-cli": "^2.0.1",
