@@ -1,0 +1,78 @@
+{
+  "operators": [
+    [
+      "left",
+      "OR"
+    ],
+    [
+      "left",
+      "AND"
+    ],
+    [
+      "right",
+      "PLUS",
+      "WITH"
+    ]
+  ],
+  "tokens": [
+    "CLOSE",
+    "COLON",
+    "EXCEPTION",
+    "LICENSE",
+    "LICENSEREF",
+    "OPEN",
+    "PLUS",
+    "AND",
+    "OR",
+    "WITH"
+  ],
+  "start": "start",
+  "bnf": {
+    "start": [
+      [
+        "expression EOS",
+        "return $$ = $1"
+      ]
+    ],
+    "simpleExpression": [
+      [
+        "LICENSE",
+        "$$ = {license: yytext}"
+      ],
+      [
+        "LICENSE PLUS",
+        "$$ = {license: $1, plus: true}"
+      ],
+      [
+        "LICENSEREF",
+        "$$ = {license: yytext}"
+      ],
+      [
+        "DOCUMENTREF COLON LICENSEREF",
+        "$$ = {license: yytext}"
+      ]
+    ],
+    "expression": [
+      [
+        "simpleExpression",
+        "$$ = $1"
+      ],
+      [
+        "simpleExpression WITH EXCEPTION",
+        "$$ = {exception: $3}\n$$.license = $1.license\nif ($1.hasOwnProperty('plus')) {\n  $$.plus = $1.plus\n}"
+      ],
+      [
+        "expression AND expression",
+        "$$ = {conjunction: 'and', left: $1, right: $3}"
+      ],
+      [
+        "expression OR expression",
+        "$$ = {conjunction: 'or', left: $1, right: $3}"
+      ],
+      [
+        "OPEN expression CLOSE",
+        "$$ = $2"
+      ]
+    ]
+  }
+}

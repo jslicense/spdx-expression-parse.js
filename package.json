@@ -31,7 +31,7 @@
   "repository": "jslicense/spdx-expression-parse.js",
   "scripts": {
     "lint": "standard",
-    "prepublish": "node generate-parser.js > parser.js",
+    "prepublish": "jison -p slr -m commonjs -o parser.js parser.json",
     "pretest": "npm run prepublish",
     "test": "defence -i javascript README.md | replace-require-self | node"
   }
