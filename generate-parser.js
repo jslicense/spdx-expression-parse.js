@@ -1,8 +1,6 @@
-var Generator = require('jison').Generator
+var Parser = require('jison').Parser
 var options = {
-  type: 'slr',
-  moduleType: 'commonjs',
-  moduleName: 'spdxparse'
+  type: 'slr'
 }
 
 var words = ['AND', 'OR', 'WITH']
@@ -96,4 +94,4 @@ var grammar = {
   }
 }
 
-console.log(new Generator(grammar, options).generate())
+module.exports = new Parser(grammar, options)
