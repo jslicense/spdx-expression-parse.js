@@ -41,9 +41,10 @@ function lex (argument) {
   }
   // Iterate through the argument string, buffering
   // non-space characters and building tokens.
+  var characterBuffer
+  var startedBuffering
+  resetBuffer()
   var tokens = []
-  var characterBuffer = ''
-  var startedBuffering = null
   var length = argument.length
   for (var offset = 0; offset < length; offset++) {
     var character = argument[offset]
@@ -74,6 +75,11 @@ function lex (argument) {
   })
   return tokens
 
+  function resetBuffer () {
+    characterBuffer = ''
+    startedBuffering = null
+  }
+
   function pushBuffered () {
     if (characterBuffer) {
       // Create a token for the buffered characters.
@@ -83,9 +89,7 @@ function lex (argument) {
         start: startedBuffering,
         end: startedBuffering + characterBuffer.length
       })
-      // Reset the buffer.
-      characterBuffer = ''
-      startedBuffering = null
+      resetBuffer()
     }
   }
 }
@@ -94,11 +98,11 @@ function tokenTypeForString (string, start) {
   if (ids.indexOf(string) !== -1) {
     return 'LICENSE'
   } else if (string === 'AND') {
-    return string
+    return 'AND'
   } else if (string === 'OR') {
-    return string
+    return 'OR'
   } else if (string === 'WITH') {
-    return string
+    return 'WITH'
   } else if (exceptions.indexOf(string) !== -1) {
     return 'EXCEPTION'
   } else if (LICENSEREF.test(string)) {
@@ -109,10 +113,10 @@ function tokenTypeForString (string, start) {
     return 'OPEN'
   } else if (string === ')') {
     return 'CLOSE'
-  } else if (string === ':') {
-    return 'COLON'
   } else if (string === '+') {
     return 'PLUS'
+  } else if (string === ':') {
+    return 'COLON'
   } else {
     throw new Error('Invalid input at offset ' + start)
   }
