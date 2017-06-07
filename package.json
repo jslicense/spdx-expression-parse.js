@@ -6,14 +6,17 @@
   "files": [
     "AUTHORS",
     "index.js",
-    "parser.js"
+    "parser.js",
+    "scanner.js"
   ],
+  "dependencies": {
+    "spdx-exceptions": "^2.0.0",
+    "spdx-license-ids": "^2.0.1"
+  },
   "devDependencies": {
     "defence-cli": "^2.0.1",
     "jison": "^0.4.15",
     "replace-require-self": "^1.0.0",
-    "spdx-exceptions": "^2.0.0",
-    "spdx-license-ids": "^2.0.1",
     "standard": "^10.0.2"
   },
   "keywords": [
