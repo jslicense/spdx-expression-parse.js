@@ -12,7 +12,7 @@ var quote = function (argument) {
 }
 
 var regexEscape = function (s) {
-  return s.replace(/[\^\\$*+?.()|{}\[\]\/]/g, '\\$&')
+  return s.replace(/[\^\\$*+?.()|{}[]\/]/g, '\\$&')
 }
 
 var handleLicensesAndExceptions = function () {
