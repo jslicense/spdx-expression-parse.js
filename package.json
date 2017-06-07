@@ -12,7 +12,7 @@
     "defence-cli": "^2.0.1",
     "jison": "^0.4.15",
     "replace-require-self": "^1.0.0",
-    "spdx-exceptions": "^1.0.4",
+    "spdx-exceptions": "^2.0.0",
     "spdx-license-ids": "^1.0.0",
     "standard": "^10.0.2"
   },
