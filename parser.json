@@ -15,15 +15,15 @@
     ]
   ],
   "tokens": [
+    "AND",
     "CLOSE",
     "COLON",
     "EXCEPTION",
     "LICENSE",
     "LICENSEREF",
     "OPEN",
-    "PLUS",
-    "AND",
     "OR",
+    "PLUS",
     "WITH"
   ],
   "start": "start",
