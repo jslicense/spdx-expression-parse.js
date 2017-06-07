@@ -6,7 +6,7 @@
   "files": [
     "AUTHORS",
     "index.js",
-    "generate-parser.js"
+    "parser.js"
   ],
   "dependencies": {
     "jison": "^0.4.15",
