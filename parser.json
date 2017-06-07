@@ -59,7 +59,7 @@
       ],
       [
         "simpleExpression WITH EXCEPTION",
-        "$$ = {exception: $3}\n$$.license = $1.license\nif ($1.hasOwnProperty('plus')) {\n  $$.plus = $1.plus\n}"
+        "$$ = {exception: $3}; $$.license = $1.license; if ($1.hasOwnProperty('plus')) { $$.plus = $1.plus }"
       ],
       [
         "expression AND expression",
