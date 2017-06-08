@@ -62,7 +62,7 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     })
     ```
 
-2.  The license expression language, for describing simple and complex license terms, like `MIT` for MIT-licensed and `(GPL-2.0 OR Apache-2.0)` for dual-licensing under GPL 2.0 and Apache 2.0.  This package implements the license expression language.
+2.  The license expression language, for describing simple and complex license terms, like `MIT` for MIT-licensed and `(GPL-2.0 OR Apache-2.0)` for dual-licensing under GPL 2.0 and Apache 2.0.  `spdx-expression-parse` itself implements license expression language, exporting a parser.
 
     ```javascript
     assert.deepEqual(
