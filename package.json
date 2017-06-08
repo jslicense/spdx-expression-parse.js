@@ -29,7 +29,7 @@
     "package.json",
     "standards"
   ],
-  "license": "(MIT AND CC-BY-3.0)",
+  "license": "MIT",
   "repository": "jslicense/spdx-expression-parse.js",
   "scripts": {
     "lint": "standard",
