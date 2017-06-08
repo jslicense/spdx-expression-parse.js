@@ -19,8 +19,9 @@ assert.throws(function () {
 })
 
 assert.deepEqual(
-  // Dual licensed under LGPL 2.1 or a combination of the Three-Clause
-  // BSD License and the MIT License.
+  // Dual licensed under either:
+  // - LGPL 2.1
+  // - a combination of Three-Clause BSD and MIT
   parse('(LGPL-2.1 OR BSD-3-Clause AND MIT)'),
   {
     left: {license: 'LGPL-2.1'},
@@ -65,8 +66,11 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
 
     ```javascript
     assert.deepEqual(
-      // Licensed under a combination of the MIT License and a combination
-      // of LGPL 2.1 (or a later version) and the Three-Clause BSD License.
+      // Licensed under a combination of:
+      // - the MIT License AND
+      // - a combination of:
+      //   - LGPL 2.1 (or a later version) AND
+      //   - Three-Clause BSD
       parse('(MIT AND (LGPL-2.1+ AND BSD-3-Clause))'),
       {
         left: {license: 'MIT'},
