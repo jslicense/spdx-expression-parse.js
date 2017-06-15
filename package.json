@@ -6,8 +6,9 @@
   "files": [
     "AUTHORS",
     "index.js",
-    "parser.js",
-    "scanner.js"
+    "parse.js",
+    "scan.js",
+    "util.js"
   ],
   "dependencies": {
     "spdx-exceptions": "^2.0.0",
