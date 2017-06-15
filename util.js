@@ -1,12 +1,3 @@
-
-function map (array, func) {
-  var result = []
-  for (var i = 0; i < array.length; i++) {
-    result.push(func(array[i]))
-  }
-  return result
-}
-
 // Returns the return value of the first function which returns a
 // truthy value.
 function oneOf (functions) {
@@ -19,6 +10,5 @@ function oneOf (functions) {
 }
 
 module.exports = {
-  map: map,
   oneOf: oneOf
 }

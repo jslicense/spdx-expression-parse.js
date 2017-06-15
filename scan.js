@@ -33,12 +33,11 @@ module.exports = function (source) {
   }
 
   function operator () {
-    var string = util.oneOf(util.map(
-      ['WITH', 'AND', 'OR', '(', ')', ':', '+'],
-      function (s) {
+    var string = util.oneOf(
+      ['WITH', 'AND', 'OR', '(', ')', ':', '+'].map(function (s) {
         return function () { return read(s) }
-      }
-    ))
+      })
+    )
 
     if (string === '+' && index > 1 && source[index - 2] === ' ') {
       throw new Error('Space before `+`')
