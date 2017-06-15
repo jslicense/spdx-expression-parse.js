@@ -1,6 +1,5 @@
 var licenses = require('spdx-license-ids')
 var exceptions = require('spdx-exceptions')
-var util = require('./util')
 
 module.exports = function (source) {
   var index = 0
@@ -33,11 +32,14 @@ module.exports = function (source) {
   }
 
   function operator () {
-    var string = util.oneOf(
-      ['WITH', 'AND', 'OR', '(', ')', ':', '+'].map(function (s) {
-        return function () { return read(s) }
-      })
-    )
+    var string
+    var possibilities = ['WITH', 'AND', 'OR', '(', ')', ':', '+']
+    for (var i = 0; i < possibilities.length; i++) {
+      string = read(possibilities[i])
+      if (string) {
+        break
+      }
+    }
 
     if (string === '+' && index > 1 && source[index - 2] === ' ') {
       throw new Error('Space before `+`')
@@ -98,12 +100,12 @@ module.exports = function (source) {
   // recognized.
   function parseToken () {
     // Ordering matters
-    return util.oneOf([
-      operator,
-      documentRef,
-      licenseRef,
-      identifier
-    ])
+    return (
+      operator() ||
+      documentRef() ||
+      licenseRef() ||
+      identifier()
+    )
   }
 
   var tokens = []

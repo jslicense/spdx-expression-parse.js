@@ -7,8 +7,7 @@
     "AUTHORS",
     "index.js",
     "parse.js",
-    "scan.js",
-    "util.js"
+    "scan.js"
   ],
   "dependencies": {
     "spdx-exceptions": "^2.0.0",

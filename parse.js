@@ -1,5 +1,3 @@
-var util = require('./util')
-
 // The ABNF grammar in the spec is totally ambiguous.
 //
 // This parser follows the operator precedence defined in the
@@ -97,11 +95,11 @@ module.exports = function (tokens) {
   }
 
   function parseAtom () {
-    return util.oneOf([
-      parseParenthesizedExpression,
-      parseLicenseRef,
-      parseLicense
-    ])
+    return (
+      parseParenthesizedExpression() ||
+      parseLicenseRef() ||
+      parseLicense()
+    )
   }
 
   function makeBinaryOpParser (operator, nextParser) {
