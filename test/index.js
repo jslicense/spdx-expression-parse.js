@@ -5,8 +5,8 @@ var p = require('..')
 
 // The spec is unclear about tabs and newlines
 it('forbids tabs and newlines', function () {
-  assert.throws(function () { return p('MIT\t') })
-  assert.throws(function () { return p('\nMIT') })
+  assert.throws(function () { p('MIT\t') })
+  assert.throws(function () { p('\nMIT') })
 })
 
 it('allows many spaces', function () {
@@ -32,7 +32,7 @@ it('allows many spaces', function () {
 
 it('forbids spaces between a license-id and a following `+`', function () {
   assert.throws(
-    function () { return p('MIT +') },
+    function () { p('MIT +') },
     /Space before `\+`/
   )
 })
