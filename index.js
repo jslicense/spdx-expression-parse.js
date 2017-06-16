@@ -1,4 +1,6 @@
-var parser = require('./parser.generated.js').parser
+var scan = require('./scan')
+var parse = require('./parse')
 
-module.exports = function(argument) {
-  return parser.parse(argument) }
+module.exports = function (source) {
+  return parse(scan(source))
+}

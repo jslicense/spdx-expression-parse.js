@@ -1,17 +1,23 @@
 {
   "name": "spdx-expression-parse",
   "description": "parse SPDX license expressions",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
+  "files": [
+    "AUTHORS",
+    "index.js",
+    "parse.js",
+    "scan.js"
+  ],
   "dependencies": {
-    "spdx-exceptions": "^1.0.4",
-    "spdx-license-ids": "^1.0.0"
+    "spdx-exceptions": "^2.0.0",
+    "spdx-license-ids": "^2.0.1"
   },
   "devDependencies": {
-    "defence-cli": "^1.0.1",
-    "jison": "^0.4.15",
+    "defence-cli": "^2.0.1",
+    "mocha": "^3.4.2",
     "replace-require-self": "^1.0.0",
-    "uglify-js": "^2.4.24"
+    "standard": "^10.0.2"
   },
   "keywords": [
     "SPDX",
@@ -23,11 +29,13 @@
     "package.json",
     "standards"
   ],
-  "license": "(MIT AND CC-BY-3.0)",
-  "repository": "kemitchell/spdx-expression-parse.js",
+  "license": "MIT",
+  "repository": "jslicense/spdx-expression-parse.js",
   "scripts": {
-    "prepublish": "node generate-parser.js | uglifyjs > parser.generated.js",
-    "pretest": "npm run prepublish",
-    "test": "defence -i javascript README.md | replace-require-self | node"
+    "lint": "standard",
+    "test:readme": "defence -i javascript README.md | replace-require-self | node",
+    "test:mocha": "mocha test/index.js",
+    "test": "npm run test:mocha && npm run test:readme",
+    "test:strict": "npm run test:mocha -- --use_strict && npm run test:readme -- --use_strict"
   }
 }

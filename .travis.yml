@@ -1,15 +1,17 @@
 ---
 language: "node_js"
 node_js:
-  - "0.10"
-  - "0.11"
-  - "0.12"
-  - "4.2"
-  - "node"
-# Each of these env lines has to have multiple assignments to trigger a
-# different build for each NODE_FLAGS value.
-env:
-  - NODE_FLAGS=""             SECOND=""
-  - NODE_FLAGS="--use_strict" SECOND=""
-script: "npm run test -- $NODE_FLAGS"
+- "0.10"
+- "0.11"
+- "0.12"
+- "4"
+- "5"
+- "6"
+- "7"
+- "8"
+- "node"
+script:
+- "npm test"
+- "npm run test:strict"
+- "npm run lint"
 sudo: false
