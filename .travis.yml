@@ -12,5 +12,6 @@ node_js:
 - "node"
 script:
 - "npm test"
+- "npm run test:strict"
 - "npm run lint"
 sudo: false

@@ -35,6 +35,7 @@
     "lint": "standard",
     "test:readme": "defence -i javascript README.md | replace-require-self | node",
     "test:mocha": "mocha test/index.js",
-    "test": "npm run test:mocha && npm run test:readme"
+    "test": "npm run test:mocha && npm run test:readme",
+    "test:strict": "npm run test:mocha -- --use_strict && npm run test:readme -- --use_strict"
   }
 }
