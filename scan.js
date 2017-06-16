@@ -1,3 +1,5 @@
+'use strict'
+
 var licenses = require('spdx-license-ids')
 var exceptions = require('spdx-exceptions')
 

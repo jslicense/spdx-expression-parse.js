@@ -1,3 +1,5 @@
+'use strict'
+
 var scan = require('./scan')
 var parse = require('./parse')
 

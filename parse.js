@@ -1,3 +1,5 @@
+'use strict'
+
 // The ABNF grammar in the spec is totally ambiguous.
 //
 // This parser follows the operator precedence defined in the
