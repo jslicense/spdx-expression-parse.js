@@ -69,16 +69,28 @@ module.exports = function (tokens) {
     var t = token()
     if (t && t.type === 'LICENSE') {
       next()
-      var node = {license: t.string}
-      if (parseOperator('+')) {
-        node.plus = true
-      }
-      var exception = parseWith()
-      if (exception) {
-        node.exception = exception
-      }
-      return node
+      return {license: t.string}
     }
+  }
+
+  function parseLicensePlus () {
+    var license = parseLicense()
+    if (license && parseOperator('+')) {
+      license.plus = true
+    }
+    return license
+  }
+
+  function parsePostfixedLicense () {
+    var license = parseLicenseRef() || parseLicensePlus()
+    if (!license) {
+      return
+    }
+    var exception = parseWith()
+    if (exception) {
+      license.exception = exception
+    }
+    return license
   }
 
   function parseParenthesizedExpression () {
@@ -99,8 +111,7 @@ module.exports = function (tokens) {
   function parseAtom () {
     return (
       parseParenthesizedExpression() ||
-      parseLicenseRef() ||
-      parseLicense()
+      parsePostfixedLicense()
     )
   }
 
@@ -130,7 +141,11 @@ module.exports = function (tokens) {
   var parseAnd = makeBinaryOpParser('AND', parseAtom)
   var parseExpression = makeBinaryOpParser('OR', parseAnd)
 
-  var node = parseExpression()
+  var node = (
+    parseParenthesizedExpression() ||
+    parseLicense() ||
+    parseLicenseRef()
+  )
   if (!node || hasMore()) {
     throw new Error('Syntax error')
   }

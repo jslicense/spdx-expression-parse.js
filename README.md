@@ -55,7 +55,7 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     require('spdx-license-ids').forEach(function (id) {
       require('spdx-exceptions').forEach(function (e) {
         assert.deepEqual(
-          parse(id + ' WITH ' + e),
+          parse('(' + id + ' WITH ' + e + ')'),
           {license: id, exception: e}
         )
       })
