@@ -84,4 +84,28 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     )
     ```
 
+The SPDX standard document provides a loose grammar, along with interpretive notes.  This package implements the parser grammar specified by the following ABNF:
+
+```abnf
+license-ref = [DOCUMENTREF ":"] LICENSEREF
+
+license-plus = LICENSE["+"]
+
+postfixed-license = (license-ref / license-plus) ["WITH" EXCEPTION]
+
+parenthesized-expression = "(" expression ")"
+
+atom = parenthesized-expression / postfixed-license
+
+and-expression = atom ["AND" and-expression]
+
+or-expression = and-expression ["OR" or-expression]
+
+expression = or-expression
+
+tag-value-format-license-expression = parenthesized-expression / 
+                                      license-id / 
+                                      license-ref
+```
+
 The Linux Foundation and its contributors license the SPDX standard under the terms of [the Creative Commons Attribution License 3.0 Unported (SPDX: "CC-BY-3.0")](http://spdx.org/licenses/CC-BY-3.0).  "SPDX" is a United States federally registered trademark of the Linux Foundation.  The authors of this package license their work under the terms of the MIT License.
