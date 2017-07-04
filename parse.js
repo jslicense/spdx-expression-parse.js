@@ -1,11 +1,17 @@
 'use strict'
 
+var licenses = require('spdx-license-ids')
+var exceptions = require('spdx-exceptions')
+
 // The ABNF grammar in the spec is totally ambiguous.
 //
 // This parser follows the operator precedence defined in the
 // `Order of Precedence and Parentheses` section.
-
-module.exports = function (tokens) {
+//
+// options:
+//  - Set `relaxed` to `true` to accept invalid license or exception IDs.
+module.exports = function (tokens, options) {
+  options = options || {}
   var index = 0
 
   function hasMore () {
@@ -34,7 +40,10 @@ module.exports = function (tokens) {
   function parseWith () {
     if (parseOperator('WITH')) {
       var t = token()
-      if (t && t.type === 'EXCEPTION') {
+      if (t && t.type === 'IDENTIFIER') {
+        if (!options.relaxed && exceptions.indexOf(t.string) === -1) {
+          throw new Error('`' + t.string + '` is not a valid exception name')
+        }
         next()
         return t.string
       }
@@ -67,7 +76,10 @@ module.exports = function (tokens) {
 
   function parseLicense () {
     var t = token()
-    if (t && t.type === 'LICENSE') {
+    if (t && t.type === 'IDENTIFIER') {
+      if (!options.relaxed && licenses.indexOf(t.string) === -1) {
+        throw new Error('`' + t.string + '` is not a valid license name')
+      }
       next()
       var node = {license: t.string}
       if (parseOperator('+')) {
