@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "defence-cli": "^2.0.1",
-    "mocha": "^3.4.2",
+    "mocha": "^5.2.0",
     "replace-require-self": "^1.0.0",
     "standard": "^10.0.2"
   },
