@@ -83,10 +83,9 @@ module.exports = function (source, options) {
   }
 
   function identifier () {
-    var begin = index
     var string = idstring()
 
-    if (typeof options.licenseVisitor === 'function' ) {
+    if (typeof options.licenseVisitor === 'function') {
       string = options.licenseVisitor(string)
     }
 
@@ -106,8 +105,6 @@ module.exports = function (source, options) {
         string: string
       }
     }
-
-    index = begin
   }
 
   // Tries to read the next token. Returns `undefined` if no token is
@@ -130,7 +127,7 @@ module.exports = function (source, options) {
     }
 
     var token = parseToken()
-    if (!token || typeof token.string === 'undefined' ) {
+    if (!token || typeof token.string === 'undefined') {
       throw new Error('Unexpected `' + source[index] +
                       '` at offset ' + index)
     }
