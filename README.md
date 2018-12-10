@@ -44,7 +44,11 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     Any license identifier from the license list is a valid license expression:
 
     ```javascript
-    require('spdx-license-ids').forEach(function (id) {
+    var identifiers = []
+      .concat(require('spdx-license-ids'))
+      .concat(require('spdx-license-ids/deprecated'))
+
+    identifiers.forEach(function (id) {
       assert.deepEqual(parse(id), {license: id})
     })
     ```
@@ -52,7 +56,7 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     So is any license identifier `WITH` a standardized license exception:
 
     ```javascript
-    require('spdx-license-ids').forEach(function (id) {
+    identifiers.forEach(function (id) {
       require('spdx-exceptions').forEach(function (e) {
         assert.deepEqual(
           parse(id + ' WITH ' + e),

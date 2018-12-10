@@ -1,7 +1,7 @@
 {
   "name": "spdx-expression-parse",
   "description": "parse SPDX license expressions",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (http://kemitchell.com)",
   "files": [
     "AUTHORS",
@@ -10,14 +10,14 @@
     "scan.js"
   ],
   "dependencies": {
-    "spdx-exceptions": "^2.0.0",
-    "spdx-license-ids": "^2.0.1"
+    "spdx-exceptions": "^2.1.0",
+    "spdx-license-ids": "^3.0.0"
   },
   "devDependencies": {
     "defence-cli": "^2.0.1",
-    "mocha": "^3.4.2",
+    "mocha": "^5.2.0",
     "replace-require-self": "^1.0.0",
-    "standard": "^10.0.2"
+    "standard": "^11.0.1"
   },
   "keywords": [
     "SPDX",

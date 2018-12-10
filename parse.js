@@ -1,6 +1,8 @@
 'use strict'
 
-var licenses = require('spdx-license-ids')
+var licenses = []
+  .concat(require('spdx-license-ids'))
+  .concat(require('spdx-license-ids/deprecated'))
 var exceptions = require('spdx-exceptions')
 
 // The ABNF grammar in the spec is totally ambiguous.
