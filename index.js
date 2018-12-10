@@ -3,6 +3,7 @@
 var scan = require('./scan')
 var parse = require('./parse')
 
-module.exports = function (source) {
-  return parse(scan(source))
+module.exports = function (source, options) {
+  options = options || {}
+  return parse(scan(source, options))
 }

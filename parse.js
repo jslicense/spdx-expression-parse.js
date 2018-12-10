@@ -78,6 +78,9 @@ module.exports = function (tokens) {
         node.exception = exception
       }
       return node
+    } else if (t && t.type === 'NOASSERTION') {
+      next()
+      return {noassertion: true}
     }
   }
 
