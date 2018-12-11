@@ -99,11 +99,20 @@ it('rejects invalid license and exception names by default', function () {
 it('accepts invalid license and exception names in relaxed mode', function () {
   assert.deepEqual(
     p('unknownLicense', {relaxed: true}),
-    {license: 'unknownLicense'}
+    {noassertion: 'unknownLicense'}
   )
 
   assert.deepEqual(
     p('MIT WITH unknownException', {relaxed: true}),
     {license: 'MIT', exception: 'unknownException'}
+  )
+
+  assert.deepEqual(
+    p('MIT OR Commercial', {relaxed: true}),
+    {
+      left: {license: 'MIT'},
+      conjunction: 'or',
+      right: {noassertion: 'Commercial'}
+    }
   )
 })

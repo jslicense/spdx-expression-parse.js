@@ -79,10 +79,13 @@ module.exports = function (tokens, options) {
   function parseLicense () {
     var t = token()
     if (t && t.type === 'IDENTIFIER') {
-      if (!options.relaxed && licenses.indexOf(t.string) === -1) {
+      next()
+      if (licenses.indexOf(t.string) === -1) {
+        if (options.relaxed) {
+          return {noassertion: t.string}
+        }
         throw new Error('`' + t.string + '` is not a valid license name')
       }
-      next()
       var node = {license: t.string}
       if (parseOperator('+')) {
         node.plus = true
