@@ -5,7 +5,8 @@ var licenses = []
   .concat(require('spdx-license-ids/deprecated'))
 var exceptions = require('spdx-exceptions')
 
-module.exports = function (source) {
+module.exports = function (source, options) {
+  options = options || {}
   var index = 0
 
   function hasMore () {
@@ -82,8 +83,11 @@ module.exports = function (source) {
   }
 
   function identifier () {
-    var begin = index
     var string = idstring()
+
+    if (typeof options.licenseVisitor === 'function') {
+      string = options.licenseVisitor(string)
+    }
 
     if (licenses.indexOf(string) !== -1) {
       return {
@@ -95,9 +99,12 @@ module.exports = function (source) {
         type: 'EXCEPTION',
         string: string
       }
+    } else {
+      return {
+        type: 'NOASSERTION',
+        string: string
+      }
     }
-
-    index = begin
   }
 
   // Tries to read the next token. Returns `undefined` if no token is
@@ -120,7 +127,7 @@ module.exports = function (source) {
     }
 
     var token = parseToken()
-    if (!token) {
+    if (!token || typeof token.string === 'undefined') {
       throw new Error('Unexpected `' + source[index] +
                       '` at offset ' + index)
     }
