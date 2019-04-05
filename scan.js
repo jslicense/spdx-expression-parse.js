@@ -1,10 +1,5 @@
 'use strict'
 
-var licenses = []
-  .concat(require('spdx-license-ids'))
-  .concat(require('spdx-license-ids/deprecated'))
-var exceptions = require('spdx-exceptions')
-
 module.exports = function (source) {
   var index = 0
 
@@ -82,22 +77,11 @@ module.exports = function (source) {
   }
 
   function identifier () {
-    var begin = index
     var string = idstring()
-
-    if (licenses.indexOf(string) !== -1) {
-      return {
-        type: 'LICENSE',
-        string: string
-      }
-    } else if (exceptions.indexOf(string) !== -1) {
-      return {
-        type: 'EXCEPTION',
-        string: string
-      }
+    return string && {
+      type: 'IDENTIFIER',
+      string: string
     }
-
-    index = begin
   }
 
   // Tries to read the next token. Returns `undefined` if no token is

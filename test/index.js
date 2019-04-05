@@ -83,3 +83,36 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
     }
   )
 })
+
+it('rejects invalid license and exception names by default', function () {
+  assert.throws(
+    function () { p('unknownLicense') },
+    /`unknownLicense` is not a valid license name/
+  )
+
+  assert.throws(
+    function () { p('MIT WITH unknownException') },
+    /`unknownException` is not a valid exception name/
+  )
+})
+
+it('accepts invalid license and exception names in relaxed mode', function () {
+  assert.deepEqual(
+    p('unknownLicense', {relaxed: true}),
+    {noassertion: 'unknownLicense'}
+  )
+
+  assert.deepEqual(
+    p('MIT WITH unknownException', {relaxed: true}),
+    {license: 'MIT', exception: 'unknownException'}
+  )
+
+  assert.deepEqual(
+    p('MIT OR Commercial', {relaxed: true}),
+    {
+      left: {license: 'MIT'},
+      conjunction: 'or',
+      right: {noassertion: 'Commercial'}
+    }
+  )
+})
