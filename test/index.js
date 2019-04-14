@@ -1,7 +1,5 @@
 'use strict'
 
-/* global it */
-
 var assert = require('assert')
 var p = require('..')
 
@@ -83,3 +81,7 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
     }
   )
 })
+
+function it (message, test) {
+  test()
+}

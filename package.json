@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "defence-cli": "^3.0.1",
-    "mocha": "^5.2.0",
     "replace-require-self": "^1.0.0",
     "standard": "^12.0.1"
   },
@@ -34,7 +33,7 @@
   "scripts": {
     "lint": "standard",
     "test:readme": "defence -i javascript README.md | replace-require-self | node",
-    "test:mocha": "mocha test/index.js",
-    "test": "npm run test:mocha && npm run test:readme"
+    "test:suite": "node test/index.js",
+    "test": "npm run test:suite && npm run test:readme"
   }
 }
