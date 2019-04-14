@@ -14,7 +14,7 @@
     "spdx-license-ids": "^3.0.0"
   },
   "devDependencies": {
-    "defence-cli": "^2.0.1",
+    "defence-cli": "^3.0.1",
     "mocha": "^5.2.0",
     "replace-require-self": "^1.0.0",
     "standard": "^11.0.1"
