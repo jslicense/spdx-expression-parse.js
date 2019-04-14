@@ -10,17 +10,17 @@ it('forbids tabs and newlines', function () {
 })
 
 it('allows many spaces', function () {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p(' MIT'),
     { license: 'MIT' }
   )
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('MIT '),
     { license: 'MIT' }
   )
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('MIT  AND    BSD-3-Clause'),
     {
       left: { license: 'MIT' },
@@ -38,12 +38,12 @@ it('forbids spaces between a license-id and a following `+`', function () {
 })
 
 it('parses DocumentRefs and LicenseRefs', function () {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('LicenseRef-something'),
     { license: 'LicenseRef-something' }
   )
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('DocumentRef-spdx-tool-1.2 : LicenseRef-MIT-Style-2'),
     { license: 'DocumentRef-spdx-tool-1.2:LicenseRef-MIT-Style-2' }
   )
@@ -51,7 +51,7 @@ it('parses DocumentRefs and LicenseRefs', function () {
 
 // See the note in `parser.js`.
 it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('MIT AND BSD-3-Clause AND CC-BY-4.0'),
     {
       left: { license: 'MIT' },
@@ -64,7 +64,7 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
     }
   )
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     p('MIT AND BSD-3-Clause WITH GCC-exception-3.1 OR CC-BY-4.0 AND Apache-2.0'),
     {
       left: {
