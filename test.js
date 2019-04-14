@@ -1,7 +1,7 @@
 'use strict'
 
 var assert = require('assert')
-var p = require('..')
+var p = require('./')
 
 // The spec is unclear about tabs and newlines
 it('forbids tabs and newlines', function () {
