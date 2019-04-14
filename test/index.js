@@ -14,20 +14,20 @@ it('forbids tabs and newlines', function () {
 it('allows many spaces', function () {
   assert.deepEqual(
     p(' MIT'),
-    {license: 'MIT'}
+    { license: 'MIT' }
   )
 
   assert.deepEqual(
     p('MIT '),
-    {license: 'MIT'}
+    { license: 'MIT' }
   )
 
   assert.deepEqual(
     p('MIT  AND    BSD-3-Clause'),
     {
-      left: {license: 'MIT'},
+      left: { license: 'MIT' },
       conjunction: 'and',
-      right: {license: 'BSD-3-Clause'}
+      right: { license: 'BSD-3-Clause' }
     }
   )
 })
@@ -42,12 +42,12 @@ it('forbids spaces between a license-id and a following `+`', function () {
 it('parses DocumentRefs and LicenseRefs', function () {
   assert.deepEqual(
     p('LicenseRef-something'),
-    {license: 'LicenseRef-something'}
+    { license: 'LicenseRef-something' }
   )
 
   assert.deepEqual(
     p('DocumentRef-spdx-tool-1.2 : LicenseRef-MIT-Style-2'),
-    {license: 'DocumentRef-spdx-tool-1.2:LicenseRef-MIT-Style-2'}
+    { license: 'DocumentRef-spdx-tool-1.2:LicenseRef-MIT-Style-2' }
   )
 })
 
@@ -56,12 +56,12 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
   assert.deepEqual(
     p('MIT AND BSD-3-Clause AND CC-BY-4.0'),
     {
-      left: {license: 'MIT'},
+      left: { license: 'MIT' },
       conjunction: 'and',
       right: {
-        left: {license: 'BSD-3-Clause'},
+        left: { license: 'BSD-3-Clause' },
         conjunction: 'and',
-        right: {license: 'CC-BY-4.0'}
+        right: { license: 'CC-BY-4.0' }
       }
     }
   )
@@ -70,15 +70,15 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
     p('MIT AND BSD-3-Clause WITH GCC-exception-3.1 OR CC-BY-4.0 AND Apache-2.0'),
     {
       left: {
-        left: {license: 'MIT'},
+        left: { license: 'MIT' },
         conjunction: 'and',
-        right: {license: 'BSD-3-Clause', exception: 'GCC-exception-3.1'}
+        right: { license: 'BSD-3-Clause', exception: 'GCC-exception-3.1' }
       },
       conjunction: 'or',
       right: {
-        left: {license: 'CC-BY-4.0'},
+        left: { license: 'CC-BY-4.0' },
         conjunction: 'and',
-        right: {license: 'Apache-2.0'}
+        right: { license: 'Apache-2.0' }
       }
     }
   )
