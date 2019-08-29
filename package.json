@@ -16,7 +16,7 @@
   "devDependencies": {
     "defence-cli": "^3.0.1",
     "replace-require-self": "^1.0.0",
-    "standard": "^13.0.2"
+    "standard": "^14.1.0"
   },
   "keywords": [
     "SPDX",
