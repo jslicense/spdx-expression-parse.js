@@ -5,7 +5,7 @@ var licenses = []
   .concat(require('spdx-license-ids/deprecated'))
 var exceptions = require('spdx-exceptions')
 
-module.exports = function (source) {
+module.exports = function (source, validateLicenseNames = true) {
   var index = 0
 
   function hasMore () {
@@ -85,14 +85,14 @@ module.exports = function (source) {
     var begin = index
     var string = idstring()
 
-    if (licenses.indexOf(string) !== -1) {
-      return {
-        type: 'LICENSE',
-        string: string
-      }
-    } else if (exceptions.indexOf(string) !== -1) {
+    if (exceptions.indexOf(string) !== -1) {
       return {
         type: 'EXCEPTION',
+        string: string
+      }
+    } else if (licenses.indexOf(string) !== -1 || !validateLicenseNames) {
+      return {
+        type: 'LICENSE',
         string: string
       }
     }
