@@ -127,7 +127,7 @@ module.exports = function (source, doNotValidateLicenseNames = false, expectWhit
     tokens.push(token)
   }
 
-  if(expectWhiteSpaceInLicenseNames){
+  if (expectWhiteSpaceInLicenseNames) {
     reduceExpandedLicenses(tokens)
   }
 
@@ -150,7 +150,7 @@ module.exports = function (source, doNotValidateLicenseNames = false, expectWhit
  * [ { type : LICENSE, string: 'Apache 2.0'}]
  *
  */
-function reduceExpandedLicenses(tokens) {
+function reduceExpandedLicenses (tokens) {
   var i = 0
   while (i < tokens.length) {
     if (i < tokens.length - 1 && tokens[i].type === 'LICENSE' && tokens[i + 1].type === 'LICENSE') {
