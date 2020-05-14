@@ -5,7 +5,7 @@ var licenses = []
   .concat(require('spdx-license-ids/deprecated'))
 var exceptions = require('spdx-exceptions')
 
-module.exports = function (source) {
+module.exports = function (source, doNotValidateLicenseNames = false, expectWhiteSpaceInLicenseNames = false) {
   var index = 0
 
   function hasMore () {
@@ -85,14 +85,14 @@ module.exports = function (source) {
     var begin = index
     var string = idstring()
 
-    if (licenses.indexOf(string) !== -1) {
-      return {
-        type: 'LICENSE',
-        string: string
-      }
-    } else if (exceptions.indexOf(string) !== -1) {
+    if (exceptions.indexOf(string) !== -1) {
       return {
         type: 'EXCEPTION',
+        string: string
+      }
+    } else if (licenses.indexOf(string) !== -1 || doNotValidateLicenseNames) {
+      return {
+        type: 'LICENSE',
         string: string
       }
     }
@@ -118,7 +118,6 @@ module.exports = function (source) {
     if (!hasMore()) {
       break
     }
-
     var token = parseToken()
     if (!token) {
       throw new Error('Unexpected `' + source[index] +
@@ -127,5 +126,39 @@ module.exports = function (source) {
 
     tokens.push(token)
   }
+
+  if (expectWhiteSpaceInLicenseNames) {
+    reduceExpandedLicenses(tokens)
+  }
+
   return tokens
+}
+
+/**
+ *
+ * @param {Array} tokens array of tokens that the scan generated
+ *
+ * This method deals with the case of license names spelled with whitespace.
+ * When doNotValidateLicenseNames is flagged true, license names as Apache 2.0 will generate this token array:
+ *
+ * [ {type: LICENSE, string: 'Apache'}, {type: LICENSE, string: '2.0'} ]
+ *
+ * which will then lead to errors thrown in the parser.
+ *
+ * After application of this method the token array will look like this:
+ *
+ * [ { type : LICENSE, string: 'Apache 2.0'}]
+ *
+ */
+function reduceExpandedLicenses (tokens) {
+  var i = 0
+  while (i < tokens.length) {
+    if (i < tokens.length - 1 && tokens[i].type === 'LICENSE' && tokens[i + 1].type === 'LICENSE') {
+      var concatName = tokens[i].string + ' ' + tokens[i + 1].string
+      tokens.splice(i + 1, 1)
+      tokens[i] = { type: 'LICENSE', string: concatName }
+    } else {
+      i += 1
+    }
+  }
 }
