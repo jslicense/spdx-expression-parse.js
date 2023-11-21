@@ -37,7 +37,7 @@ module.exports = function (source) {
 
   function operator () {
     var string
-    var possibilities = ['WITH', 'with', 'AND', 'and', 'OR', 'or', '(', ')', ':', '+']
+    var possibilities = [/^WITH/i, /^AND/i, /^OR/i, '(', ')', ':', '+']
     for (var i = 0; i < possibilities.length; i++) {
       string = read(possibilities[i])
       if (string) {
