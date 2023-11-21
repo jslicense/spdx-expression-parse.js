@@ -82,22 +82,28 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
   )
 })
 
-it('allows lower-case `and`, `or`, and `with` by default', function () {
-  assert.deepStrictEqual(
-    p('MIT and BSD-3-Clause or GPL-2.0 with GCC-exception-2.0'),
-    {
-      left: {
-        left: { license: 'MIT' },
-        conjunction: 'and',
-        right: { license: 'BSD-3-Clause' }
-      },
-      conjunction: 'or',
-      right: {
-        license: 'GPL-2.0',
-        exception: 'GCC-exception-2.0'
-      }
+it('allows mixed-case `and`, `or`, and `with`', function () {
+  var variants = [
+    'MIT and BSD-3-Clause or GPL-2.0 with GCC-exception-2.0',
+    'MIT aNd BSD-3-Clause oR GPL-2.0 wITh GCC-exception-2.0',
+    'MIT AnD BSD-3-Clause Or GPL-2.0 WitH GCC-exception-2.0'
+  ]
+  var result = {
+    left: {
+      left: { license: 'MIT' },
+      conjunction: 'and',
+      right: { license: 'BSD-3-Clause' }
+    },
+    conjunction: 'or',
+    right: {
+      license: 'GPL-2.0',
+      exception: 'GCC-exception-2.0'
     }
-  )
+  }
+  for (let index = 0; index < variants.length; index++) {
+    const variant = variants[index]
+    assert.deepStrictEqual(p(variant), result)
+  }
 })
 
 function it (message, test) {
