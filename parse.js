@@ -25,7 +25,7 @@ module.exports = function (tokens) {
 
   function parseOperator (operator) {
     var t = token()
-    if (t && t.type === 'OPERATOR' && operator === t.string) {
+    if (t && t.type === 'OPERATOR' && operator === t.string.toUpperCase()) {
       next()
       return t.string
     }
