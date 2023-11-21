@@ -47,6 +47,7 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     var identifiers = []
       .concat(require('spdx-license-ids'))
       .concat(require('spdx-license-ids/deprecated'))
+      .filter(function (id) { return id[id.length - 1] !== '+' })
 
     identifiers.forEach(function (id) {
       assert.deepEqual(parse(id), {license: id})
