@@ -89,4 +89,17 @@ The bulk of the SPDX standard describes syntax and semantics of XML metadata fil
     )
     ```
 
+This package differs slightly from the SPDX standard in allowing lower- and mixed-case `AND`, `OR`, and `WITH` operators:
+
+```javascript
+assert.deepEqual(
+  parse('MIT or BSD-2-Clause'),
+  { left: { license: 'MIT' }, conjunction: 'or', right: { license: 'BSD-2-Clause' } }
+)
+assert.deepEqual(
+  parse('GPL-2.0 with GCC-exception-2.0'),
+  { license: 'GPL-2.0', exception: 'GCC-exception-2.0' }
+)
+```
+
 The Linux Foundation and its contributors license the SPDX standard under the terms of [the Creative Commons Attribution License 3.0 Unported (SPDX: "CC-BY-3.0")](http://spdx.org/licenses/CC-BY-3.0).  "SPDX" is a United States federally registered trademark of the Linux Foundation.  The authors of this package license their work under the terms of the MIT License.
