@@ -49,6 +49,17 @@ it('parses DocumentRefs and LicenseRefs', function () {
   )
 })
 
+it('requires DocumentRefs to be followed by LicenseRef', function () {
+  assert.throws(
+    function () { p('DocumentRef-something:x') },
+    /Error: Unexpected `x`/
+  )
+  assert.throws(
+    function () { p('DocumentRef-something:') },
+    /Error: Unexpected end of input/
+  )
+})
+
 // See the note in `parser.js`.
 it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
   assert.deepStrictEqual(
@@ -104,6 +115,59 @@ it('allows mixed-case `and`, `or`, and `with`', function () {
     const variant = variants[index]
     assert.deepStrictEqual(p(variant), result)
   }
+})
+
+it('supports License with exception', function ()   {
+  assert.deepStrictEqual(
+    p('GPL-2.0 WITH GCC-exception-2.0'),
+    {
+      license: 'GPL-2.0',
+      exception: 'GCC-exception-2.0'
+    }
+  )
+})
+
+it('supports LicenseRef with exception', function ()   {
+  assert.deepStrictEqual(
+    p('LicenseRef-something WITH GCC-exception-2.0'),
+    {
+      license: 'LicenseRef-something',
+      exception: 'GCC-exception-2.0'
+    }
+  )
+  assert.deepStrictEqual(
+    p('DocumentRef-somedoc : LicenseRef-something WITH GCC-exception-2.0'),
+    {
+      license: 'DocumentRef-somedoc:LicenseRef-something',
+      exception: 'GCC-exception-2.0'
+    }
+  )
+})
+
+it('parses simple expressions in parens', function ()   {
+  assert.deepStrictEqual(
+    p('(MIT)'),
+    {
+      license: 'MIT'
+    }
+  )
+  assert.deepStrictEqual(
+    p('(LicenseRef-something)'),
+    {
+      license: 'LicenseRef-something'
+    }
+  )
+})
+
+it('does not validate compound expressions with exception', function () {
+  assert.throws(
+    function () { p('(LicenseRef-something) WITH GCC-exception-2.0') },
+    /Error: Syntax error/
+  )
+  assert.throws(
+    function () { p('(DocumentRef-somedoc : LicenseRef-something) WITH GCC-exception-2.0') },
+    /Error: Syntax error/
+  )
 })
 
 function it (message, test) {
