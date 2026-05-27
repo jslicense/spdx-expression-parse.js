@@ -57,10 +57,18 @@ module.exports = function (tokens) {
       }
     }
     t = token()
+    if (t === null) {
+      throw new Error('Unexpected end of input')
+    }
     if (t.type === 'LICENSEREF') {
       next()
       string += 'LicenseRef-' + t.string
-      return { license: string }
+      var node = { license: string }
+      var exception = parseWith()
+      if (exception) {
+        node.exception = exception
+      }
+      return node
     }
     index = begin
   }
