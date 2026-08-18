@@ -170,6 +170,13 @@ it('does not validate compound expressions with exception', function () {
   )
 })
 
+it('throws "excessive nesting" for 1001 parens', function () {
+  assert.throws(
+    function () { p(new Array(1001).join('(') + ' MIT)') },
+    /excessive nesting/
+  )
+})
+
 function it (message, test) {
   test()
 }
