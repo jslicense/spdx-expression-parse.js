@@ -117,7 +117,7 @@ it('allows mixed-case `and`, `or`, and `with`', function () {
   }
 })
 
-it('supports License with exception', function ()   {
+it('supports License with exception', function () {
   assert.deepStrictEqual(
     p('GPL-2.0 WITH GCC-exception-2.0'),
     {
@@ -127,7 +127,7 @@ it('supports License with exception', function ()   {
   )
 })
 
-it('supports LicenseRef with exception', function ()   {
+it('supports LicenseRef with exception', function () {
   assert.deepStrictEqual(
     p('LicenseRef-something WITH GCC-exception-2.0'),
     {
@@ -144,7 +144,7 @@ it('supports LicenseRef with exception', function ()   {
   )
 })
 
-it('parses simple expressions in parens', function ()   {
+it('parses simple expressions in parens', function () {
   assert.deepStrictEqual(
     p('(MIT)'),
     {
