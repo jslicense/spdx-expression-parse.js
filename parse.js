@@ -7,6 +7,7 @@
 
 module.exports = function (tokens) {
   var index = 0
+  var parentheticalNestingDepthCounter = 0
 
   function hasMore () {
     return index < tokens.length
@@ -90,6 +91,8 @@ module.exports = function (tokens) {
   }
 
   function parseParenthesizedExpression () {
+    if (++parentheticalNestingDepthCounter > 1000) throw new Error('excessive nesting')
+
     var left = parseOperator('(')
     if (!left) {
       return
